@@ -20,6 +20,21 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="create-user-sequence" author="Ryazanov">
+        <createSequence sequenceName="USER_SEQUENCE" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="create-table-user-roles" author="Ryazanov">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <changeSet id="create-table-companies" author="Ryazanov">
         <createTable tableName="companies">
             <column name="id" type="int">
