@@ -14,7 +14,7 @@
             <column name="name" type="varchar(225)">
                 <constraints nullable="false"/>
             </column>
-            <column name="password" type="varchar(225)">
+            <column name="password" type="varchar(60)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
