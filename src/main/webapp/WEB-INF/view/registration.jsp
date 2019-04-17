@@ -4,6 +4,7 @@
     <title>Register New User</title>
 </head>
 <body>
+${message}
 <form action="/registration" method="post">
     <div><label> User Name : <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
