@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="insert-company" author="Ryazanov">
+        <insert tableName="companies">
+            <column name="id">0</column>
+            <column name="name">Хлебкомбинат</column>
+        </insert>
+        <insert tableName="companies">
+            <column name="id">1</column>
+            <column name="name">Молокозавод</column>
+        </insert>
+        <insert tableName="companies">
+            <column name="id">2</column>
+            <column name="name">Мясокомбинат</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-product" author="Ryazanov">
+        <insert tableName="products">
+            <column name="id">10</column>
+            <column name="name">Хлеб белый</column>
+            <column name="calorie">259</column>
+            <column name="fats">3</column>
+            <column name="proteins">7.7</column>
+            <column name="carbohydrates">50.1</column>
+            <column name="company_id">0</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">11</column>
+            <column name="name">Хлеб ржаной</column>
+            <column name="calorie">165</column>
+            <column name="fats">1.2</column>
+            <column name="proteins">6.6</column>
+            <column name="carbohydrates">34.2</column>
+            <column name="company_id">0</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">12</column>
+            <column name="name">Хлеб соевый</column>
+            <column name="calorie">282</column>
+            <column name="fats">1.2</column>
+            <column name="proteins">52</column>
+            <column name="carbohydrates">17.4</column>
+            <column name="company_id">0</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">13</column>
+            <column name="name">Батон столичный</column>
+            <column name="calorie">243</column>
+            <column name="fats">0.8</column>
+            <column name="proteins">7.7</column>
+            <column name="carbohydrates">50.2</column>
+            <column name="company_id">0</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">20</column>
+            <column name="name">Сметана</column>
+            <column name="calorie">115</column>
+            <column name="fats">10</column>
+            <column name="proteins">3</column>
+            <column name="carbohydrates">2.9</column>
+            <column name="company_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">21</column>
+            <column name="name">Кефир</column>
+            <column name="calorie">50</column>
+            <column name="fats">2.5</column>
+            <column name="proteins">2.8</column>
+            <column name="carbohydrates">3.9</column>
+            <column name="company_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">22</column>
+            <column name="name">Простокваша</column>
+            <column name="calorie">40</column>
+            <column name="fats">1</column>
+            <column name="proteins">3</column>
+            <column name="carbohydrates">4.1</column>
+            <column name="company_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">23</column>
+            <column name="name">Молоко</column>
+            <column name="calorie">53</column>
+            <column name="fats">2.5</column>
+            <column name="proteins">2.9</column>
+            <column name="carbohydrates">4.7</column>
+            <column name="company_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">24</column>
+            <column name="name">Сливки</column>
+            <column name="calorie">337</column>
+            <column name="fats">35</column>
+            <column name="proteins">2.5</column>
+            <column name="carbohydrates">3</column>
+            <column name="company_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">30</column>
+            <column name="name">Говядина</column>
+            <column name="calorie">254</column>
+            <column name="fats">16.8</column>
+            <column name="proteins">25.9</column>
+            <column name="carbohydrates">0</column>
+            <column name="company_id">2</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">31</column>
+            <column name="name">Сало</column>
+            <column name="calorie">797</column>
+            <column name="fats">89</column>
+            <column name="proteins">2.4</column>
+            <column name="carbohydrates">0</column>
+            <column name="company_id">2</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">32</column>
+            <column name="name">Курица</column>
+            <column name="calorie">129</column>
+            <column name="fats">6</column>
+            <column name="proteins">21</column>
+            <column name="carbohydrates">0</column>
+            <column name="company_id">2</column>
+        </insert>
+        <insert tableName="products">
+            <column name="id">33</column>
+            <column name="name">Паштет мясной</column>
+            <column name="calorie">170</column>
+            <column name="fats">11.0</column>
+            <column name="proteins">15.0</column>
+            <column name="carbohydrates">0</column>
+            <column name="company_id">2</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

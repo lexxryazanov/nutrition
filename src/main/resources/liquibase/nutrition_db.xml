@@ -67,4 +67,6 @@
             </column>
         </createTable>
     </changeSet>
+
+    <include file="liquibase/table_content.xml"/>
 </databaseChangeLog>
