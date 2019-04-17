@@ -1,0 +1,38 @@
+body {
+    background-color: black;
+    color: yellow;
+}
+
+h2 {
+    text-align: center;
+}
+
+.user-header {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.credentials {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 20%;
+    height: 20%;
+}
+
+.credentials .error {
+    text-align: center;
+    color: red;
+    font-style: italic;
+    font-size: medium;
+}
+
+.credentials .login-button {
+    text-align: center;
+}
+
+.credentials .page-link {
+    color: violet;
+    text-align: center;
+}
