@@ -8,8 +8,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
-    Page<Product> findAll(Pageable pageable);
+    @Query(value = "select p.id, p.name, c.name from Product p inner join Company c on p.company = c.id")
+    Page findAll(Pageable pageable);
 
-    @Query(value = "select p from Product p inner join Company c on p.company = c.id where lower(p.name) like lower(concat('%',:keyword,'%')) or lower(c.name) like lower(concat('%',:keyword,'%'))")
-    Page<Product> findAllByKeyword(String keyword, Pageable pageable);
+    @Query(value = "select p.id, p.name, c.name from Product p inner join Company c on p.company = c.id where lower(p.name) like lower(concat('%',:keyword,'%')) or lower(c.name) like lower(concat('%',:keyword,'%'))")
+    Page findAllByKeyword(String keyword, Pageable pageable);
 }

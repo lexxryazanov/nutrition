@@ -15,11 +15,29 @@ th {
     text-align: center;
     color: wheat;
 }
-
 .user-header {
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+.products-table {
+    width: 80%;
+    position: relative;
+    float: left;
+}
+
+.product-details {
+    width: 20%;
+    position: relative;
+    float: right;
+    top: 100px;
+    left: 50px;
+    color: wheat;
+}
+
+.product-details tr {
+    color: wheat;
 }
 
 .credentials {

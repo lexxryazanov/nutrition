@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Nutrition Data Base</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/styles.css"/> "/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/styles.css"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/jquery.dataTables.css">
 
     <script type="text/javascript" charset="utf8" src="/resources/js/jquery-1.12.4.min.js"></script>
@@ -12,15 +12,8 @@
 
     <script>
         var keyword = "";
-
         $(document).ready(function () {
-            $('#search_id').keypress(function (event) {
-                if (event.which == 13) {
-                    keyword = $(this).val();
-                    table.ajax.reload();
-                }
-            })
-            var table = $('#products').DataTable({
+            var tProducts = $('#products').DataTable({
                 bFilter: false,
                 "ajax": {
                     url: "/api/product",
@@ -32,14 +25,30 @@
                     }
                 },
                 columns: [
-                    {title: "Name", data: 'name'},
-                    {title: "Calorie", data: 'calorie'},
-                    {title: "Fats", data: 'fats'},
-                    {title: "Proteins", data: 'proteins'},
-                    {title: "Carbohydrates", data: 'carbohydrates'},
-                    {title: "Vendor", data: 'company.name'}
+                    {title: "Name", data: 1},
+                    {title: "Vendor", data: 2}
                 ]
             });
+            $('#products tbody').on('click', 'tr', function () {
+                var data = tProducts.row(this).data();
+                $.ajax({
+                    url: "/api/product/" + data[0],
+                }).done(function(json) {
+                    $('#property-name').text(json.name);
+                    $('#property-calorie').text(json.calorie);
+                    $('#property-fats').text(json.fats);
+                    $('#property-proteins').text(json.proteins);
+                    $('#property-carbohydrates').text(json.carbohydrates);
+                    $('#property-company').text(json.company.name);
+                });
+            });
+
+            $('#search_id').keypress(function (event) {
+                if (event.which == 13) {
+                    keyword = $(this).val();
+                    tProducts.ajax.reload();
+                }
+            })
         });
     </script>
 </head>
@@ -74,12 +83,40 @@
     Search for product: <input id="search_id" type="search">
 </div>
 
-<table id="products" class="display">
-    <tr>
-        <th>Name</th>
-        <th>Savings</th>
-    </tr>
-</table>
-
+<div width="100%">
+    <div class="products-table">
+        <table id="products" class="display">
+        </table>
+    </div>
+    <div class="product-details">
+        <div>Product Details</div>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td id="property-name">...</td>
+            </tr>
+            <tr>
+                <td>Calorie</td>
+                <td id="property-calorie">...</td>
+            </tr>
+            <tr>
+                <td>Fats</td>
+                <td id="property-fats">...</td>
+            </tr>
+            <tr>
+                <td>Proteins</td>
+                <td id="property-proteins">...</td>
+            </tr>
+            <tr>
+                <td>Carbohydrates</td>
+                <td id="property-carbohydrates">...</td>
+            </tr>
+            <tr>
+                <td>Vendor</td>
+                <td id="property-company">...</td>
+            </tr>
+        </table>
+    </div>
+</div>
 </body>
 </html>
