@@ -3,7 +3,8 @@ package com.nexing.nutrition.controller;
 import com.nexing.nutrition.database.entity.Product;
 import com.nexing.nutrition.database.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,17 +21,17 @@ public class ProductController {
 
     @GetMapping(path = "/api/product")
     public @ResponseBody
-    Iterable getProducts(@RequestParam(name = "keyword", required = false) String keyword, @RequestParam(name = "page", defaultValue = "0") Integer page, @RequestParam(name = "size", defaultValue = "100") Integer size) {
+    Iterable<Product> getProducts(@RequestParam(name = "keyword", required = false) String keyword, @PageableDefaults(value = Integer.MAX_VALUE) Pageable pageable) {
         if (keyword == null || keyword.length() == 0) {
-            return productRepository.findAll(PageRequest.of(page, size)).getContent();
+            return productRepository.findAll(pageable).getContent();
         } else {
-            return productRepository.findAllByKeyword(keyword, PageRequest.of(page, size)).getContent();
+            return productRepository.findAllByKeyword(keyword, pageable).getContent();
         }
     }
 
     @GetMapping(path = "/api/product/{id}")
     public @ResponseBody
-    Optional<Product> getProduct(@PathVariable(value = "id")  Integer id) {
+    Optional<Product> getProduct(@PathVariable(value = "id") Integer id) {
         return productRepository.findById(id);
     }
 }

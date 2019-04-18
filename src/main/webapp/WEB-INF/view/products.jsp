@@ -25,14 +25,13 @@
                     }
                 },
                 columns: [
-                    {title: "Name", data: 1},
-                    {title: "Vendor", data: 2}
-                ]
+                    {title: "Name", data: 'name'},
+                    {title: "Vendor", data: 'company.name'}                ]
             });
             $('#products tbody').on('click', 'tr', function () {
                 var data = tProducts.row(this).data();
                 $.ajax({
-                    url: "/api/product/" + data[0],
+                    url: "/api/product/" + data.id,
                 }).done(function(json) {
                     $('#property-name').text(json.name);
                     $('#property-calorie').text(json.calorie);
