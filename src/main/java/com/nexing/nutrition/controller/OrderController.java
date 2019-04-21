@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
@@ -31,6 +32,23 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @GetMapping(path = "/products/add")
+    public ModelAndView addPage(@RequestParam(name = "id", required = false) Integer id) {
+        ModelAndView modelAndView = new ModelAndView("edit");
+        productRepository.findById(id).ifPresent(product -> {
+            product.setId(null);
+            modelAndView.addObject("product", product);
+        });
+        return modelAndView;
+    }
+
+    @GetMapping(path = "/products/edit")
+    public ModelAndView editPage(@RequestParam(name = "id") Integer id) {
+        ModelAndView modelAndView = new ModelAndView("edit");
+        productRepository.findById(id).ifPresent(product -> modelAndView.addObject("product", product));
+        return modelAndView;
+    }
+
     @GetMapping(path = "/api/order")
     public @ResponseBody
     Iterable<Order> getOrders() {
@@ -46,11 +64,11 @@ public class OrderController {
         return orderRepository.findAllByUserName(userName);
     }
 
-    @PutMapping(path = "/api/order", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/order", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Order addOrder(@Valid @RequestBody Order order) {
         if (order.getProductId() != null) {
-            productRepository.findById(order.getId()).orElseThrow(() -> new ResourceNotFoundException("Product doesn't exist. Id=" + order.getProductId()));
+            productRepository.findById(order.getProductId()).orElseThrow(() -> new ResourceNotFoundException("Product doesn't exist. Id=" + order.getProductId()));
         }
         if (order.getCompanyId() != null) {
             companyRepository.findById(order.getCompanyId()).orElseThrow(() -> new ResourceNotFoundException("Company doesn't exist. Id=" + order.getCompanyId()));
@@ -60,7 +78,7 @@ public class OrderController {
             }
             companyRepository.findFirstByName(order.getCompanyName()).ifPresent(company -> {
                 order.setCompanyId(company.getId());
-                order.setName(null);
+                order.setCompanyName(null);
             });
         }
         order.setState(OrderState.NEW);

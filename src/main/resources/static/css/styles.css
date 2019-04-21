@@ -21,6 +21,10 @@ th {
     top: 10px;
 }
 
+.user-header div {
+    color: wheat;
+}
+
 .products-table {
     width: 80%;
     position: relative;
@@ -36,11 +40,16 @@ th {
     color: wheat;
 }
 
-.product-details tr {
+.product-details tr, .edit-product tr {
     color: wheat;
 }
 
-.credentials {
+.edit-product div {
+    text-align: center;
+    color: wheat;
+}
+
+.credentials, .edit-product {
     position: absolute;
     top: 40%;
     left: 40%;

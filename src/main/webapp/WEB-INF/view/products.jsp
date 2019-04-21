@@ -1,6 +1,7 @@
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% String userName = SecurityContextHolder.getContext().getAuthentication().getName();%>
 <html>
 <head>
     <title>Nutrition Data Base</title>
@@ -13,6 +14,7 @@
     <script>
         var keyword = "";
         $(document).ready(function () {
+            $('#edit-links').hide();
             var tProducts = $('#products').DataTable({
                 bFilter: false,
                 "ajax": {
@@ -26,13 +28,17 @@
                 },
                 columns: [
                     {title: "Name", data: 'name'},
-                    {title: "Vendor", data: 'company.name'}                ]
+                    {title: "Vendor", data: 'company.name'}
+                ]
             });
             $('#products tbody').on('click', 'tr', function () {
                 var data = tProducts.row(this).data();
                 $.ajax({
                     url: "/api/product/" + data.id,
-                }).done(function(json) {
+                }).done(function (json) {
+                    $('#edit-links').show();
+                    $('#edit-link').attr("href", "/products/edit?id=" + json.id);
+                    $('#add-link').attr("href", "/products/add?id=" + json.id);
                     $('#property-name').text(json.name);
                     $('#property-calorie').text(json.calorie);
                     $('#property-fats').text(json.fats);
@@ -56,11 +62,9 @@
 <di class="user-header">
     <table>
         <tr>
-            <% if (!SecurityContextHolder.getContext()
-                    .getAuthentication().getPrincipal().equals("anonymousUser")) {%>
+            <% if (!userName.equals("anonymousUser")) {%>
             <td>
-                <div>You're logged in as <%=SecurityContextHolder.getContext()
-                        .getAuthentication().getName()%>
+                <div>You're logged in as <%=userName%>
                 </div>
             </td>
             <td>
@@ -115,6 +119,12 @@
                 <td id="property-company">...</td>
             </tr>
         </table>
+        <% if (!userName.equals("anonymousUser")) { %>
+        <div id="edit-links">
+            <a id="edit-link">[Edit product]</a>
+            <a id="add-link">[Add new product]</a>
+        </div>
+        <% } %>
     </div>
 </div>
 </body>

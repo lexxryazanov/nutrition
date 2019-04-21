@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/styles.css"/> "/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/styles.css"/>
 </head>
 <body>
 <div class="credentials">
