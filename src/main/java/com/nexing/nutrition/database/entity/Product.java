@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "product-id-generator", sequenceName = "PRODUCT_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product-id-generator")
     private Integer id;
 
     private String name;

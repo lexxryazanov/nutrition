@@ -20,8 +20,8 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="create-user-sequence" author="Ryazanov">
-        <createSequence sequenceName="USER_SEQUENCE" startValue="1" incrementBy="1"/>
+    <changeSet id="create-sequence-user" author="Ryazanov">
+        <createSequence sequenceName="USER_SEQUENCE" startValue="100" incrementBy="1"/>
     </changeSet>
 
     <changeSet id="create-table-user-roles" author="Ryazanov">
@@ -35,6 +35,10 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="create-sequence-companies" author="Ryazanov">
+        <createSequence sequenceName="COMPANY_SEQUENCE" incrementBy="1" minValue="100"/>
+    </changeSet>
+
     <changeSet id="create-table-companies" author="Ryazanov">
         <createTable tableName="companies">
             <column name="id" type="int">
@@ -44,6 +48,10 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="create-sequence-products" author="Ryazanov">
+        <createSequence sequenceName="PRODUCT_SEQUENCE" incrementBy="1" minValue="100"/>
     </changeSet>
 
     <changeSet id="create-table-products" author="Ryazanov">
@@ -63,6 +71,47 @@
             <column name="carbohydrates" type="number(6,2)">
             </column>
             <column name="company_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-sequence-orders" author="Ryazanov">
+        <createSequence sequenceName="ORDER_SEQUENCE" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="create-table-orders" author="Ryazanov">
+        <createTable tableName="orders">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(225)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="product_id" type="int">
+            </column>
+
+            <column name="name" type="varchar(225)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calorie" type="number(6,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fats" type="number(6,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="proteins" type="number(6,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carbohydrates" type="number(6,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="int">
+            </column>
+            <column name="company_name" type="varchar(225)">
+            </column>
+            <column name="state" type="smallint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
